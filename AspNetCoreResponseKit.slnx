@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AspNetCoreResponseKit.Tests/AspNetCoreResponseKit.Tests.csproj" Id="5f0dfc03-ae8b-4f71-a79d-214d7741811b" />
+  <Project Path="AspNetCoreResponseKit/AspNetCoreResponseKit.csproj" />
+</Solution>

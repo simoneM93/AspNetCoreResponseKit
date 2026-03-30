@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>true</IsPackable>
+		<PackageId>AspNetCoreResponseKit</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Simone Marano</Authors>
+		<Description>Standardized API response envelope and global exception handling middleware for ASP.NET Core. Smart factory methods, automatic exception-to-status-code mapping, and native integration with AspNetCoreAuthKit and AspNetCoreHttpKit.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>aspnetcore;api;response;exception-handling;middleware;result-pattern;dotnet;csharp;api-response;error-handling</PackageTags>
+		<RepositoryUrl>https://github.com/simoneM93/AspNetCoreResponseKit</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://github.com/simoneM93/AspNetCoreResponseKit</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>https://github.com/simoneM93/AspNetCoreResponseKit/blob/main/CHANGELOG.md</PackageReleaseNotes>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\CHANGELOG.md" Pack="true" PackagePath="\" />
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="AspNetCoreHttpKit" Version="1.0.0" />
+		<PackageReference Include="AspNetCoreAuthKit" Version="1.0.0" />
+	</ItemGroup>
+
+</Project>
