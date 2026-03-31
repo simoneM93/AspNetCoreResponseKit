@@ -31,8 +31,8 @@ Standardized API response envelope and global exception handling middleware for 
  
 | Requirement | Minimum version |
 |---|---|
-| .NET | 8.0+ |
-| ASP.NET Core | 8.0+ |
+| .NET | 9.0+ |
+| ASP.NET Core | 9.0+ |
  
 ---
  
