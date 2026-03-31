@@ -75,7 +75,7 @@ namespace AspNetCoreResponseKit.Tests.Mapping
         public void Map_HttpKitExceptions_ReturnCorrectStatusCodes(
             Type exceptionType, HttpStatusCode expectedCode)
         {
-            var ex = (Exception)Activator.CreateInstance(exceptionType, "test message")!;
+            var ex = (Exception)Activator.CreateInstance(exceptionType, "test message", null)!;
             var (statusCode, _) = _mapper.Map(ex);
             Assert.Equal(expectedCode, statusCode);
         }

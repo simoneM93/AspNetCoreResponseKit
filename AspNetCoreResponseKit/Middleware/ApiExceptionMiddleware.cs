@@ -3,14 +3,8 @@ using AspNetCoreResponseKit.Models;
 using AspNetCoreResponseKit.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace AspNetCoreResponseKit.Middleware
 {
@@ -70,7 +64,7 @@ namespace AspNetCoreResponseKit.Middleware
             var (statusCode, resolvedMessage) = _resolver.Resolve(exception);
 
             // When IncludeExceptionDetails is false, mask internal errors with DefaultErrorMessage
-            var message = !_options.IncludeExceptionDetails && statusCode == HttpStatusCode.InternalServerError
+            var message = !_options.IncludeExceptionDetails
                 ? _options.DefaultErrorMessage
                 : resolvedMessage;
 

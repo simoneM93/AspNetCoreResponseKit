@@ -31,8 +31,8 @@ Standardized API response envelope and global exception handling middleware for 
  
 | Requirement | Minimum version |
 |---|---|
-| .NET | 9.0+ |
-| ASP.NET Core | 9.0+ |
+| .NET | 8.0+ |
+| ASP.NET Core | 8.0+ |
  
 ---
  
@@ -110,7 +110,7 @@ app.MapGet("/proxy/users/{id}", async (int id, IHttpService http, CancellationTo
     var result = await http.GetAsync<UserDto>($"/users/{id}", ct);
  
     // Converts HttpResult<T> directly — status code propagated based on options
-    return ApiResponse.From(result).ToResult();
+    return ApiResponse.FromHttpResult(result).ToResult();
 });
 ```
  

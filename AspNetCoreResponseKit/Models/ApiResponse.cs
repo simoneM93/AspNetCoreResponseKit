@@ -1,11 +1,6 @@
 ﻿using AspNetCoreHttpKit.Models;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreResponseKit.Models
 {
@@ -40,10 +35,6 @@ namespace AspNetCoreResponseKit.Models
         internal static ApiResponse<T> Failure(HttpStatusCode statusCode, string message, IReadOnlyList<ApiError>? errors = null)
             => new(false, default, statusCode, message, errors);
 
-        // ----------------------------------------------------------
-        // Fluent transformations
-        // ----------------------------------------------------------
-
         /// <summary>
         /// Transforms the data when the response is successful.
         /// </summary>
@@ -60,7 +51,7 @@ namespace AspNetCoreResponseKit.Models
         /// </summary>
         public ApiResponse<T> OnNull(string message, HttpStatusCode statusCode = HttpStatusCode.NotFound)
         {
-            if (IsSuccess && Data is null)
+            if (Data is null)
                 return Failure(statusCode, message);
 
             return this;
@@ -90,10 +81,6 @@ namespace AspNetCoreResponseKit.Models
             Message = message;
             Errors = errors ?? [];
         }
-
-        // ----------------------------------------------------------
-        // Explicit factory methods
-        // ----------------------------------------------------------
 
         public static ApiResponse<T> Ok<T>(T data, string? message = null)
             => ApiResponse<T>.Success(data, HttpStatusCode.OK, message);
@@ -128,10 +115,6 @@ namespace AspNetCoreResponseKit.Models
         public static ApiResponse Error(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
             => new(false, statusCode, message, null);
 
-        // ----------------------------------------------------------
-        // Smart factory — sync
-        // ----------------------------------------------------------
-
         /// <summary>
         /// Returns Ok if value is not null, otherwise returns the configured null status code.
         /// </summary>
@@ -154,10 +137,6 @@ namespace AspNetCoreResponseKit.Models
                 ? new(true, HttpStatusCode.OK, onTrue, null)
                 : new(false, failureCode, onFalse, null);
 
-        // ----------------------------------------------------------
-        // Smart factory — async
-        // ----------------------------------------------------------
-
         /// <summary>
         /// Executes the factory and returns Ok if the result is not null.
         /// Exceptions are NOT caught here — let the middleware handle them.
@@ -173,15 +152,11 @@ namespace AspNetCoreResponseKit.Models
             return From(value, nullMessage, nullStatusCode);
         }
 
-        // ----------------------------------------------------------
-        // Integration with AspNetCoreHttpKit
-        // ----------------------------------------------------------
-
         /// <summary>
         /// Converts an HttpResult&lt;T&gt; from AspNetCoreHttpKit to an ApiResponse&lt;T&gt;.
         /// Status code propagation follows ResponseKitOptions.PropagateUpstreamStatusCodes.
         /// </summary>
-        public static ApiResponse<T> From<T>(HttpResult<T> result)
+        public static ApiResponse<T> FromHttpResult<T>(HttpResult<T> result)
         {
             if (result.IsSuccess)
                 return ApiResponse<T>.Success(result.Data, result.StatusCode);
@@ -196,7 +171,7 @@ namespace AspNetCoreResponseKit.Models
         /// <summary>
         /// Converts a non-generic HttpResult from AspNetCoreHttpKit.
         /// </summary>
-        public static ApiResponse From(HttpResult result)
+        public static ApiResponse FromHttpResult(HttpResult result)
         {
             if (result.IsSuccess)
                 return new(true, result.StatusCode, null, null);
@@ -207,10 +182,6 @@ namespace AspNetCoreResponseKit.Models
 
             return new(false, statusCode, result.ErrorMessage ?? "Upstream error.", null);
         }
-
-        // ----------------------------------------------------------
-        // IResult helper
-        // ----------------------------------------------------------
 
         public IResult ToResult()
             => Results.Json(this, statusCode: (int)StatusCode);
