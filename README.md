@@ -218,6 +218,22 @@ When an unhandled exception is caught by the middleware, it is resolved in this 
 | `DefaultErrorMessage` | `string` | `"An unexpected error occurred."` | Fallback error message |
  
 ---
+
+## 🧩 Part of the ASP.NET Core Kit ecosystem
+ 
+AspNetCoreResponseKit is part of a cohesive set of lightweight, DI-ready toolkits for ASP.NET Core:
+ 
+| Package | Description |
+|---|---|
+| [AspNetCoreAuthKit](https://www.nuget.org/packages/AspNetCoreAuthKit) | JWT, API Key, Refresh Tokens with rotation & dynamic claim policies |
+| [AspNetCoreResponseKit](https://www.nuget.org/packages/AspNetCoreResponseKit) | Standardized `ApiResponse<T>`, global exception handling & smart factories |
+| [AspNetCoreHttpKit](https://www.nuget.org/packages/AspNetCoreHttpKit) | Typed HTTP client with result pattern & StructLog integration |
+| [AspNetCoreCacheKit](https://www.nuget.org/packages/AspNetCoreCacheKit) | Group-based caching with per-entry & per-group duration |
+| [StructLog](https://www.nuget.org/packages/StructLog) | Structured logging with EventCode support & custom enrichers |
+ 
+Each package works independently — use one or all five.
+
+---
  
 ## ❤️ Support
  
